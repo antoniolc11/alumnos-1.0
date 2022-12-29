@@ -21,7 +21,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('portal');
 
-Route::resource('alumnos', AlumnoController::class);
+Route::resource('alumnos', AlumnoController::class)->names('alumnos');
+
+Route::get('alumnos/criterios/{alumno}', [AlumnoController::class, 'criterios'])->name('alumnos.criterios');
 
 /* Route::get('/carrito/insertar/{id}', function ($id) {
     $articulo = Articulo::findOrFail($id);

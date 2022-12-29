@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAlumnos;
 use Illuminate\Http\Request;
 use App\Models\Alumno;
 
@@ -14,7 +15,7 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        $alumnos = Alumno::paginate();
+        $alumnos = Alumno::all();
         return view('alumnos.index', ['alumnos' => $alumnos]);
     }
 
@@ -34,9 +35,10 @@ class AlumnoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAlumnos $request)
     {
-        //
+        $alumno = Alumno::create($request->all());
+        return redirect()->route('alumnos.show', $alumno);
     }
 
     /**
@@ -45,9 +47,9 @@ class AlumnoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($alumno)
+    public function show(Alumno $alumno)
     {
-        return view('alumno.show', ['alumno' => $alumno]);
+        return view('alumnos.show', compact('alumno'));
     }
 
     /**
@@ -56,9 +58,9 @@ class AlumnoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($alumno)
+    public function edit(Alumno $alumno)
     {
-        //
+        return view('alumnos.edit', ['alumno' => $alumno]);
     }
 
     /**
@@ -68,9 +70,15 @@ class AlumnoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $alumno)
+    public function update(Request $request, Alumno $alumno)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+        ]);
+
+        $alumno->update($request->all());
+
+        return redirect()->route('alumnos.show', $alumno);
     }
 
     /**
@@ -79,8 +87,15 @@ class AlumnoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($alumno)
+    public function destroy(Alumno $alumno)
     {
-        //
+        $alumno->delete();
+        return redirect()->route('alumnos.index');
+    }
+
+    public function criterios(Alumno $alumno)
+    {
+
+        return view('alumnos.criterios', ['alumno' => $alumno]);
     }
 }
