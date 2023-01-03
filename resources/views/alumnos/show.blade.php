@@ -1,13 +1,36 @@
 @extends('layouts.plantilla')
 @section('tittle', 'home')
 @section('content')
-    <h1>Bienvenido al alumno: {{$alumno->nombre}}</h1>
-    <a href="{{ route('alumnos.index') }}">Volver a alumnos</a>
-    <a href="{{ route('alumnos.edit', $alumno) }}">Editar alumno</a>
-    <a href="{{ route('alumnos.criterios', $alumno) }}">ver criterios del alumno</a>
-    <form action="{{route('alumnos.destroy', $alumno)}}" method="POST">
-        @csrf
-        @method('delete')
-        <button type="submit">Eliminar alumno</button>
-    </form>
+<div class="flex justify-center mt-10">
+    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <a href="#">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$alumno->nombre}}</h5>
+        </a>
+        <a href="{{ route('alumnos.criterios', $alumno) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            ver criterios del alumno
+            <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </a><br>
+
+        <a href="{{ route('alumnos.edit', $alumno) }}" class="inline-flex items-center px-3 py-2 mr-2 ml-auto mt-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Editar alumno
+            <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </a><br>
+
+        <form action="{{route('alumnos.destroy', $alumno)}}" method="POST">
+            @csrf
+            @method('delete')
+            <button type="submit" class="text-white m-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 ml-auto mt-2 mb-1 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Eliminar alumno</button>
+
+        </form>
+
+        <a href="{{ route('alumnos.index') }}" class="inline-flex items-center px-3 py-2 ml-auto mt-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Volver a alumnos
+            <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </a><br>
+    </div>
+</div>
+
+
+
+
 @endsection
